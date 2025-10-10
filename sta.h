@@ -42,7 +42,11 @@ int xradio_change_interface(struct ieee80211_hw *dev,
                             struct ieee80211_vif *vif,
                             enum nl80211_iftype new_type,
                             bool p2p);
-int xradio_config(struct ieee80211_hw *dev, u32 changed);
+int xradio_config(struct ieee80211_hw *dev,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+		  int radio_idx,
+#endif
+		  u32 changed);
 int xradio_change_interface(struct ieee80211_hw *dev,
                             struct ieee80211_vif *vif,
                             enum nl80211_iftype new_type,
@@ -65,7 +69,11 @@ int xradio_get_stats(struct ieee80211_hw *dev,
 int xradio_get_tx_stats(struct ieee80211_hw *dev,
 			struct ieee80211_tx_queue_stats *stats);
 */
-int xradio_set_rts_threshold(struct ieee80211_hw *hw, u32 value);
+int xradio_set_rts_threshold(struct ieee80211_hw *hw,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+			     int radio_idx,
+#endif
+			     u32 value);
 
 void xradio_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif, u32 queues, bool drop);
 
