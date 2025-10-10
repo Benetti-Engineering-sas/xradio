@@ -381,7 +381,11 @@ int xradio_change_interface(struct ieee80211_hw *dev,
 	return ret;
 }
 
-int xradio_config(struct ieee80211_hw *dev, u32 changed)
+int xradio_config(struct ieee80211_hw *dev,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+		  int radio_idx,
+#endif
+		  u32 changed)
 {
 	int ret = 0;
 	struct xradio_common *hw_priv = dev->priv;
@@ -796,7 +800,11 @@ void xradio_wep_key_work(struct work_struct *work)
 	wsm_unlock_tx(hw_priv);
 }
 
-int xradio_set_rts_threshold(struct ieee80211_hw *hw, u32 value)
+int xradio_set_rts_threshold(struct ieee80211_hw *hw,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+			     int radio_idx,
+#endif
+			     u32 value)
 {
 	struct xradio_common *hw_priv = hw->priv;
 	int ret = 0;
